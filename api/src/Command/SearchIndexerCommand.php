@@ -67,6 +67,8 @@ class SearchIndexerCommand extends Command
 
         while (($line = fgetcsv($handler, 0, "\t")) !== false) {
             $document = array_combine($header, $line);
+            $document['id'] = $document['tconst'];
+            unset($document['tconst']);
 
             yield $document;
             $i++;

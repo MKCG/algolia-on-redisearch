@@ -5,6 +5,8 @@ namespace App\Search;
 use Ehann\RedisRaw\PredisAdapter;
 use Ehann\RediSearch\RediSearchRedisClient;
 use Ehann\RediSearch\Index;
+use Ehann\RediSearch\Document\AbstractDocumentFactory;
+use Ehann\RediSearch\Fields\NumericField;
 
 class IndexManager
 {
@@ -20,7 +22,7 @@ class IndexManager
     public function createImdbTitleIndex()
     {
         $this->index
-            ->addTagField('tconst', true)
+            ->addTagField('id', true)
             ->addTagField('titleType', true)
             ->addTextField('primaryTitle')
             ->addTextField('originalTitle')
@@ -41,13 +43,26 @@ class IndexManager
 
     public function addDocument(array $document)
     {
-        foreach (['startYear', 'endYear', 'runtimeMinutes'] as $numericField) {
-            if (!is_numeric($document[$numericField])) {
-                unset($document[$numericField]);
+        $instance = $this->makeDocInstance($document);
+        $this->index->add($instance);
+    }
+
+    private function makeDocInstance(array $document)
+    {
+        $id = $document['id'];
+        unset($document['id']);
+
+        $fields = get_object_vars($this->index);
+
+        foreach ($document as $field => $value) {
+            if (!isset($fields[$field])) {
+                unset($document[$field]);
+            } else if ($fields[$field] instanceof NumericField && !is_numeric($value)) {
+                unset($document[$field]);
             }
         }
 
-        $this->index->add($document);
+        return AbstractDocumentFactory::makeFromArray($document, $fields, $id);
     }
 }
 
