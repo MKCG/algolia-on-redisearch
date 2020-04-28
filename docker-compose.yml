@@ -4,6 +4,15 @@ services:
   redisearch:
     image: redislabs/redisearch:latest
     restart: always
+    command: [
+      "redis-server",
+      "--loadmodule",
+      "/usr/lib/redis/modules/redisearch.so",
+      "TIMEOUT", "100",       # query timeout
+      "ON_TIMEOUT", "RETURN", # return results found on timeout
+      "MINPREFIX", "1",       # Ensure that prefix search is always performed
+      "MAXEXPANSIONS", "50",  # Limit the number of expansions for query prefixes
+    ]
 
   api_redisearch:
     image: api_redisearch
