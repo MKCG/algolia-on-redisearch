@@ -6,7 +6,9 @@ fi
 
 cd /var/www/html/api
 
+composer install
 bin/console search:indexer
+
 yarn install
 yarn encore production
 
