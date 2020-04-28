@@ -13,3 +13,4 @@ yarn install
 yarn encore production
 
 service nginx start
+php-fpm

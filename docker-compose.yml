@@ -8,10 +8,10 @@ services:
       "redis-server",
       "--loadmodule",
       "/usr/lib/redis/modules/redisearch.so",
-      "TIMEOUT", "100",       # query timeout
-      "ON_TIMEOUT", "RETURN", # return results found on timeout
-      "MINPREFIX", "1",       # Ensure that prefix search is always performed
-      "MAXEXPANSIONS", "1000",# Increase the number of expansions for query prefixes
+      "TIMEOUT", "100",         # query timeout
+      "ON_TIMEOUT", "RETURN",   # return results found on timeout
+      "MINPREFIX", "1",         # Ensure that prefix search is always performed
+      "MAXEXPANSIONS", "1000",  # Increase the number of expansions for query prefixes
     ]
 
   api_redisearch:
@@ -28,5 +28,5 @@ services:
       - ./scripts:/var/www/html/scripts
     depends_on:
       - redisearch
-    # command: tail -f /dev/null
+    command: ./scripts/init.sh
     restart: always
