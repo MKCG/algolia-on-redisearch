@@ -1,13 +1,6 @@
 version: '3'
 
 services:
-  mysql:
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-
   redisearch:
     image: redislabs/redisearch:latest
     restart: always
@@ -18,10 +11,13 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
+    ports:
+      - 8100:80
     volumes:
-      - ./:/var/www/
+      - ./api.conf:/etc/nginx/sites-available/default
+      - ./api:/var/www/html/api
+      - ./scripts:/var/www/html/scripts
     depends_on:
-      - mysql
       - redisearch
-    command: tail -f /dev/null
+    # command: tail -f /dev/null
     restart: always
