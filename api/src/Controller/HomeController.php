@@ -28,7 +28,7 @@ class HomeController extends AbstractController
     public function singleIndexQuery(string $index, Request $request)
     {
         return new JsonResponse([
-            'results' => [ $this->getResult($index, []) ]
+            'results' => [ [ 'params' => $request['raw'] ?? ''] + $this->getResult($index, []) ]
         ]);
     }
 
@@ -92,7 +92,7 @@ class HomeController extends AbstractController
             }
         }
 
-        if (isset($params['facetFilters']) && is_array($params['facetFilters']) && is_array($params['facetFilters'][0])) {
+        if (isset($params['facetFilters']) && is_array($params['facetFilters'])) {
             foreach ($params['facetFilters'] as $facetFilter) {
                 foreach ($facetFilter as $selectedFacet) {
                     list($fieldName, $selectedValue) = explode(':', $selectedFacet);
@@ -154,10 +154,9 @@ class HomeController extends AbstractController
             'index' => $index,
             'nbHits' => $results->getCount(),
             'nbPages' => ceil($results->getCount() / $limit),
-            'page' => 0,
-            'params' => '',
+            'page' => $page,
             'processingTimeMS' => round($took * 1000),
-            'query' => '',
+            'query' => $params['query'] ?? '',
         ];
     }
 

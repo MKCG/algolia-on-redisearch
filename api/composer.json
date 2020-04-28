@@ -7,7 +7,7 @@
         "ext-iconv": "*",
         "doctrine/dbal": "^2.10",
         "ethanhann/redisearch-php": "^1.9",
-        "mkcg/php-query-model": "^0.9.4",
+        "mkcg/php-query-model": "^0.9.5",
         "predis/predis": "^1.1",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",

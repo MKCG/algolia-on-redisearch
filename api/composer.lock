@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f225e51e79a0c2e10e61f2be58afad21",
+    "content-hash": "71f76b9180527e9011088097df74b9c9",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -421,16 +421,16 @@
         },
         {
             "name": "mkcg/php-query-model",
-            "version": "0.9.4",
+            "version": "0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MKCG/php-query-model.git",
-                "reference": "b596485567985ecf6e054c7111695b63fcc111ec"
+                "reference": "ad37bffcc8c0e6b7b3fb889a1e8e5f03245f0448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MKCG/php-query-model/zipball/b596485567985ecf6e054c7111695b63fcc111ec",
-                "reference": "b596485567985ecf6e054c7111695b63fcc111ec",
+                "url": "https://api.github.com/repos/MKCG/php-query-model/zipball/ad37bffcc8c0e6b7b3fb889a1e8e5f03245f0448",
+                "reference": "ad37bffcc8c0e6b7b3fb889a1e8e5f03245f0448",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,7 @@
                 "robots.txt",
                 "rss"
             ],
-            "time": "2020-04-15T18:27:15+00:00"
+            "time": "2020-04-28T12:39:11+00:00"
         },
         {
             "name": "nikic/php-parser",
