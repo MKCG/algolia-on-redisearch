@@ -1,3 +1,13 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\HomeController::index
+
+search_v1_single_index_query:
+  path: /search/1/indexes/{index}/query
+  controller: App\Controller\HomeController::singleIndexQuery
+  requirements:
+    index: .*
+
+search_v1_many_index_query:
+  path: /search/1/indexes/*/queries
+  controller: App\Controller\HomeController::manyIndexQuery

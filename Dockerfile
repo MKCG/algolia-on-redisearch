@@ -16,6 +16,9 @@ RUN curl -sS https://getcomposer.org/installer | php \
 RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
+# NPM
+RUN apt install -y npm yarn
+RUN npm install -g yarn
 
 # Nginx
 RUN mkdir -p /var/www/html
@@ -23,8 +26,8 @@ RUN apt install -y nginx
 RUN chown -R www-data:www-data /var/www/html
 
 COPY api.conf /etc/nginx/sites-available/default
-RUN service nginx start
 
+RUN service nginx start
 RUN usermod -u 1000 www-data
 WORKDIR /var/www/html
 

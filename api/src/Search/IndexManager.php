@@ -22,6 +22,7 @@ class IndexManager
     public function createImdbTitleIndex()
     {
         $this->index
+            ->setStopWords([])
             ->addTagField('id', true)
             ->addTagField('titleType', true)
             ->addTextField('primaryTitle')

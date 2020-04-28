@@ -30,15 +30,15 @@ services:
         calls:
             - [ 'connect' , [ '%env(REDISEARCH_HOST)%' , '%env(REDISEARCH_PORT)%' ] ]
 
-    MKCG\DBAL\Drivers\Redisearch:
+    MKCG\Model\DBAL\Drivers\Redisearch:
         arguments:
             - '@Ehann\RedisRaw\PredisAdapter'
             - redisearch
 
-    MKCG\DBAL\QueryEngine:
+    MKCG\Model\DBAL\QueryEngine:
         arguments:
             - redisearch
         calls:
-            - [ 'registerDriver' , [ '@MKCG\DBAL\Drivers\Redisearch' , 'redisearch' ] ]
+            - [ 'registerDriver' , [ '@MKCG\Model\DBAL\Drivers\Redisearch' , 'redisearch' ] ]
 
 
