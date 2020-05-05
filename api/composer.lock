@@ -425,12 +425,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MKCG/php-query-model.git",
-                "reference": "f8636368620a25064705522780379f2084110634"
+                "reference": "7434424c5c815ee2968b7623eb1468ca932caf85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MKCG/php-query-model/zipball/f8636368620a25064705522780379f2084110634",
-                "reference": "f8636368620a25064705522780379f2084110634",
+                "url": "https://api.github.com/repos/MKCG/php-query-model/zipball/7434424c5c815ee2968b7623eb1468ca932caf85",
+                "reference": "7434424c5c815ee2968b7623eb1468ca932caf85",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,7 @@
                 "robots.txt",
                 "rss"
             ],
-            "time": "2020-05-05T01:45:17+00:00"
+            "time": "2020-05-05T02:47:22+00:00"
         },
         {
             "name": "nikic/php-parser",
