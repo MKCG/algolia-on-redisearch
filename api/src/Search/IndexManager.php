@@ -15,13 +15,15 @@ class IndexManager
     public function __construct(PredisAdapter $client)
     {
         $this->client = $client;
-        $this->index = (new Index($this->client))
-            ->setIndexName('imdb_titles');
+        $this->indexes = [
+            'imdb' => (new Index($this->client))->setIndexName('imdb_titles'),
+            'siret' => (new Index($this->client))->setIndexName('siret')
+        ];
     }
 
     public function createImdbTitleIndex()
     {
-        $this->index
+        $this->indexes['imdb']
             ->setStopWords([])
             ->addTagField('id', true)
             ->addTagField('titleType', true)
@@ -34,26 +36,54 @@ class IndexManager
             ->addTagField('genres', true, false, ',');
 
         try {
-            $this->index->drop();
+            $this->indexes['imdb']->drop();
         } catch (\Exception $e) {
 
         }
 
-        $this->index->create();
+        $this->indexes['imdb']->create();
     }
 
-    public function addDocument(array $document)
+    public function createSiretIndex()
     {
-        $instance = $this->makeDocInstance($document);
-        $this->index->add($instance);
+        $this->indexes['siret']
+            ->setStopWords([])
+            ->addTagField('id', true)
+            ->addTagField('siren')
+            ->addTagField('siret')
+            ->addTagField('store_name', true)
+            ->addTagField('society_name', true)
+            ->addNumericField('street_number')
+            ->addTagField('street_type')
+            ->addTagField('street_name', true)
+            ->addNumericField('zipcode', true)
+            ->addTagField('city', true)
+            ->addTextField('address')
+            ->addTextField('names')
+            ->addTextField('all')
+        ;
+
+        try {
+            $this->indexes['siret']->drop();
+        } catch (\Exception $e) {
+
+        }
+
+        $this->indexes['siret']->create();
     }
 
-    private function makeDocInstance(array $document)
+    public function addDocument($index, array $document)
+    {
+        $instance = $this->makeDocInstance($index, $document);
+        $this->indexes[$index]->add($instance);
+    }
+
+    private function makeDocInstance($index, array $document)
     {
         $id = $document['id'];
         unset($document['id']);
 
-        $fields = get_object_vars($this->index);
+        $fields = get_object_vars($this->indexes[$index]);
 
         foreach ($document as $field => $value) {
             if (!isset($fields[$field])) {

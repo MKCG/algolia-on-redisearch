@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Algolia on Redisearch{% endblock %}
+
+{% block stylesheets %}
+  <style type="text/css">
+    .facet-radio {
+      display: inline;
+    }
+
+    .facet-terms li {
+      padding: 4px;
+      min-height: 20px;
+    }
+
+    #searchbox input {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        display: block;
+        font-size: 16px;
+        font-family: "Helvetica","Arial",sans-serif;
+        margin: 0;
+        padding: 4px 0;
+        width: 100%;
+        background: 0 0;
+        text-align: left;
+        color: inherit;
+        outline: none;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <main class="mdl-layout__content">
+      <div class="container ais-InstantSearch">
+        <h1>Algolia on Redisearch</h1>
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--3-col">
+            <div id="hits-per-page"></div>
+            <div id="current-refinements"></div>
+            <h2>Ville</h2>
+            <div id="facet-city"></div>
+            <h2>Entreprise</h2>
+            <div id="facet-society"></div>
+          </div>
+
+          <div class="mdl-cell mdl-cell--9-col">
+            <div id="searchbox" style="margin-bottom: 20px; width: 90%"></div>
+            <div id="hits" class="row" style="width: 90%"></div>
+            <div id="pagination" class="row"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('stores') }}
+{% endblock %}

@@ -2,6 +2,10 @@ index:
    path: /
    controller: App\Controller\HomeController::index
 
+stores:
+   path: /stores
+   controller: App\Controller\HomeController::stores
+
 search_v1_single_index_query:
   path: /search/1/indexes/{index}/query
   controller: App\Controller\HomeController::singleIndexQuery

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Schema\IMDB;
+use App\Schema\Siret;
 use MKCG\Model\DBAL\QueryEngine;
 use MKCG\Model\DBAL\QueryCriteria;
 use MKCG\Model\DBAL\FilterInterface;
@@ -23,6 +24,12 @@ class HomeController extends AbstractController
     public function index()
     {
         return $this->render('index.html.twig');
+    }
+
+
+    public function stores()
+    {
+        return $this->render('stores.html.twig');
     }
 
     public function singleIndexQuery(string $index, Request $request)
@@ -63,6 +70,11 @@ class HomeController extends AbstractController
             case 'imdb_titles':
                 $model = IMDB::make('default', $index);
                 $fulltextField = 'primaryTitle';
+                break;
+
+            case 'siret':
+                $model = Siret::make('default', $index);
+                $fulltextField = 'all';
                 break;
             
             default:
